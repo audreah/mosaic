@@ -6,3 +6,6 @@ Péter Hámori \<hampet97@gmail.com>
 
 ## Description
 Correctly identifying objects portrayed in images remains a significant challenge in computer vision, where existing models are trained on dominant figures and identities within a contemporary context. Data bias of this form neglects underrepresented communities and variations of objects, thereby limiting extensions to more specific topics such as census reporting or early modern artwork. This project aims to fine tune models to recognize various types of objects by providing a wider source of training images and analyzing patterns within them. The results of this work can be applied to support image editing software, aid in research methods for digital humanities, and increase the efficiency of conducting inventory.
+
+## Data Loading
+Run `coco_data_load.ipynb`
