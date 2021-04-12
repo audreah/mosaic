@@ -10,3 +10,8 @@ Correctly identifying objects portrayed in images remains a significant challeng
 ## Data Loading
 Download 2014 Train/Val annotations from https://cocodataset.org/#download and name the folder "annotations_trainval2014"<br>
 Run `coco_data_load.ipynb`
+
+## Training and Evaluation
+Store your path to `instances_train2014.json` in `annFileTrain`
+Run `coco_load_train_eval.ipynb`
+
