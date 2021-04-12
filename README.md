@@ -12,6 +12,6 @@ Download 2014 Train/Val annotations from https://cocodataset.org/#download and n
 Run `coco_data_load.ipynb`
 
 ## Training and Evaluation
-Store your path to `instances_train2014.json` in `annFileTrain`
+Store your path to `instances_train2014.json` in `annFileTrain`<br>
 Run `coco_load_train_eval.ipynb`
 
