@@ -28,7 +28,7 @@ Initially, we trained the original LeNet-5 for binary classification. Practicall
 
 Secondly, we performed multiclass image classification using the aforementioned four classes. We paid attention to the number of samples of each class. We did not feel the need to specify the numbers explicitly, as random sampling always resulted in a fairly balanced dataset containing 100 to 400 samples of each class. Additionally to the images (encoded as arrays), we also gave the model the masks as input as a four dimension after the red, green, and blue image channels. We figured specifying the place of objects within the image may help the prediction.
 
-For this task, the target vectors are one-hot encoded, meaning they consist of four elements, which are exactly one 1, and three 0s. We used categorical cross entropy for the loss function, and Adam as optimizer. Each layer has a tangent hyperbolicus activation function, except for the Dense layer, which has Softmax, as we want the model to point out the most probable class. 
+For this task, the target vectors are one-hot encoded, meaning they consist of four elements, which are exactly one 1, and three 0s. We used ```categorical cross entropy``` for the loss function, and ```Adam``` as optimizer. Each layer has a ```tangent hyperbolicus``` activation function, except for the Dense layer, which has ```Softmax```, as we want the model to point out the most probable class. 
 
 Throughout the semester we experimented with many different architectures. The final architecture of our model can be seen in the visualization below created in Netron. 
 
@@ -52,15 +52,16 @@ Following our work with LeNet-5, we looked towards more advanced models such as 
 
 ![Predictions from base model](https://github.com/audreah/mosaic/blob/main/yolo-base-model.png)
 ![Predictions from base model](https://github.com/audreah/mosaic/blob/main/yolo_best_weights.png)
-Figure 1. Left: predictions using baseline YOLOv4 model. Right: predictions from the retrained model, where the person on the left is correctly identified and the “chair” label for the stand in the middle is accurately removed.
 
-The training set consisted of 2500 images per class (12,500 images total) whereas the validation and test sets were 20% of that size. Thus, we adjusted steps to 8000, 9000. Each input image was resized to 416 x 416 to accommodate for limitations of RAM and GPU usage on Google Colab. Since we focused on 5 classes, we set max_batches to 10000 and used 30 filters for each \[convolutional] layer preceding a \[yolo] layer. We adhered to recommendations from the authors of the baseline model to decide these hyperparameters. The model allows us to specify an ignore threshold, below which predictions would not be shown; we used a relatively low threshold of 0.3 to encompass most of the conclusions drawn in order to analyze how well the model was working. Over 10 hours of training produced a model with the following metrics for a confidence threshold of 0.25:
+Figure 1. Top: predictions using baseline YOLOv4 model. Bottom: predictions from the retrained model, where the person on the left is correctly identified and the “chair” label for the stand in the middle is accurately removed.
 
-⋅⋅⋅precision = 0.38
-⋅⋅⋅recall = 0.62
-⋅⋅⋅F1-score = 0.47
-⋅⋅⋅average IoU = 28.52 % 
-⋅⋅⋅mean average precision (mAP@0.50) = 0.405164
+The training set consisted of 2500 images per class (12,500 images total) whereas the validation and test sets were 20% of that size. Thus, we adjusted ```steps``` to 8000, 9000. Each input image was resized to 416 x 416 to accommodate for limitations of RAM and GPU usage on Google Colab. Since we focused on 5 classes, we set ```max_batches``` to 10000 and used 30 filters for each \[convolutional] layer preceding a \[yolo] layer. We adhered to recommendations from the authors of the baseline model to decide these hyperparameters. The model allows us to specify an ignore threshold, below which predictions would not be shown; we used a relatively low threshold of 0.3 to encompass most of the conclusions drawn in order to analyze how well the model was working. Over 10 hours of training produced a model with the following metrics for a confidence threshold of 0.25:
+
+precision = 0.38
+recall = 0.62
+F1-score = 0.47
+average IoU = 28.52 % 
+mean average precision (mAP@0.50) = 0.405164
 
 These metrics were gathered from our YOLOv4 model pre-trained on the COCO dataset and re-trained on images from Google’s Open Image Dataset. Clearly, there is still room for improvement that could be achieved with more training, images of higher resolution, and a more diverse training dataset. 
 
