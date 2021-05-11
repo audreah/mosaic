@@ -8,12 +8,24 @@ Péter Hámori \<hampet97@gmail.com>
 Correctly identifying objects portrayed in images remains a significant challenge in computer vision, where existing models are trained on dominant figures within a contemporary context. Data bias of this form neglects underrepresented communities and variations of objects, thereby limiting extensions to more specific topics such as census reporting or photography. This project aims to expand upon existing models to recognize variations within common objects by providing a broader source of training images. The results of this work can be applied to aid in research methods for digital humanities and increase the efficiency of conducting inventory.
 
 ## Data Loading
+(LeNet-5)
 Download 2014 Train/Val annotations from https://cocodataset.org/#download and name the folder "annotations_trainval2014"<br>
 Run `coco_data_load.ipynb`
 
+(YOLOv4)
+Run `yolov4.ipynb`
+
 ## Training and Evaluation
+(LeNet-5)
 Store your path to `instances_train2014.json` in `annFileTrain`<br>
 Run `coco_load_train_eval.ipynb`
+
+(YOLOv4)
+Train: ```!./darknet detector train data/obj.data cfg/yolov4-obj.cfg yolov4.conv.137 -dont_show -map```
+Predict: ```!./darknet detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights <path-to-your-image>```
+```imShow('predictions.jpg')```
+
+(see [yolov4.ipynb](https://github.com/audreah/mosaic/blob/yolov4.ipynb))
 
 ## LeNet-5
 We began this project by using the LeNet-5 model as a starting point. LeNet-5 was proposed by Yann LeCunn in 1989. It is a small and simple neural network, consisting of two Convolutional layers (each followed by an Average Pooling layer), a Flatten layer, and two or three Dense layers. 
@@ -33,6 +45,7 @@ For this task, the target vectors are one-hot encoded, meaning they consist of f
 Throughout the semester we experimented with many different architectures. The final architecture of our model can be seen in the visualization below created in Netron. 
 
 ![LeNet-5 Network Visualization in Netron](https://github.com/audreah/mosaic/blob/main/LeNet-viz.png)
+
 Figure 1. Network visualization of our LeNet-5 model.
 
 We eliminated one Dense layer from the original LeNet-5 model, as well as decreased the number of parameters for the first Dense layer. As suggested by the Professor, we introduced regularization to the network (L2). We also applied dropout and early stopping. 
@@ -55,7 +68,7 @@ Following our work with LeNet-5, we looked towards more advanced models such as 
 
 Figure 1. Top: predictions using baseline YOLOv4 model. Bottom: predictions from the retrained model, where the person on the left is correctly identified and the “chair” label for the stand in the middle is accurately removed.
 
-The training set consisted of 2500 images per class (12,500 images total) whereas the validation and test sets were 20% of that size. Thus, we adjusted ```steps``` to 8000, 9000. Each input image was resized to 416 x 416 to accommodate for limitations of RAM and GPU usage on Google Colab. Since we focused on 5 classes, we set ```max_batches``` to 10000 and used 30 filters for each \[convolutional] layer preceding a \[yolo] layer. We adhered to recommendations from the authors of the baseline model to decide these hyperparameters. The model allows us to specify an ignore threshold, below which predictions would not be shown; we used a relatively low threshold of 0.3 to encompass most of the conclusions drawn in order to analyze how well the model was working. Over 10 hours of training produced a model with the following metrics for a confidence threshold of 0.25:
+The training set consisted of 2500 images per class (12,500 images total) whereas the validation and test sets were 20% of that size. Thus, we adjusted ```steps``` to 8000, 9000. Each input image was resized to 416 x 416 to accommodate for limitations of RAM and GPU usage on Google Colab. Since we focused on 5 classes, we set ```max_batches``` to 10000 and used 30 filters for each \[convolutional] layer preceding a \[yolo] layer. We adhered to [recommendations](https://github.com/AlexeyAB/darknet#how-to-train-to-detect-your-custom-objects) from the authors of the baseline model to decide these hyperparameters. The model allows us to specify an ignore threshold, below which predictions would not be shown; we used a relatively low threshold of 0.3 to encompass most of the conclusions drawn in order to analyze how well the model was working. Over 10 hours of training produced a model with the following metrics for a confidence threshold of 0.25:
 
 precision = 0.38
 recall = 0.62
