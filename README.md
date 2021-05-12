@@ -14,7 +14,7 @@ Run `coco_data_load.ipynb`
 
 (YOLOv4)<br>
 Make sure you have access to [this Google Drive folder](https://drive.google.com/drive/folders/1Hg38Pfj7WPsUn-6dbeqTCY8qYLmdxS9o?usp=sharing)<br>
-Run `yolov4.ipynb`
+See `yolov4.ipynb`
 
 ## Training and Evaluation
 (LeNet-5)<br>
@@ -26,7 +26,7 @@ Train: ```!./darknet detector train data/obj.data cfg/yolov4-obj.cfg yolov4.conv
 Predict: ```!./darknet detector test cfg/coco.data cfg/yolov4.cfg yolov4.weights <path-to-your-image>```
 ```imShow('predictions.jpg')```
 
-(see [yolov4.ipynb](https://github.com/audreah/mosaic/blob/yolov4.ipynb))
+(Follow the direcetions outlined in [yolov4.ipynb](https://github.com/audreah/mosaic/blob/yolov4.ipynb))
 
 ## LeNet-5
 We began this project by using the LeNet-5 model as a starting point. LeNet-5 was proposed by Yann LeCunn in 1989. It is a small and simple neural network, consisting of two Convolutional layers (each followed by an Average Pooling layer), a Flatten layer, and two or three Dense layers. 
@@ -51,7 +51,12 @@ Figure 1. Network visualization of our LeNet-5 model.
 
 We eliminated one Dense layer from the original LeNet-5 model, as well as decreased the number of parameters for the first Dense layer. As suggested by the Professor, we introduced regularization to the network (L2). We also applied dropout and early stopping. 
 After performing manual hyperparameter optimization for the batch size, we opted for a relatively small number of 32. 
-We did a detailed evaluation of the results using some of the metrics covered at class. The mean accuracy of the predicted target vectors over 5 runs is 0.38, while the precision is 0.31, the recall is 0.32, and the F1 score is 0.3. 
+We did a detailed evaluation of the results using some of the metrics covered at class. <br>
+For predicted target vectors over 5 runs, the following metrics were collected:<br>
+*  mean accuracy = 0.38
+*  precision = 0.31
+*  recall = 0.32
+*  F1 score = 0.3.
 
 Taking a look at some of the predictions, we saw that most of the times the model seems to be indecisive between two classes, one of which is usually the correct class. 
 
@@ -73,11 +78,11 @@ The training set consisted of 2500 images per class (12,500 images total) wherea
 
 The following metrics were collected from a model trained only on the Person class, since training for all 5 classes caused us to run into many issues with GPU usage and time constraints. This situation is not ideal and we hope to continue training the full model. Over 10 hours of training for the single class produced the following metrics for a confidence threshold of 0.25:
 
-precision = 0.38
-recall = 0.62
-F1-score = 0.47
-average IoU = 28.52 % 
-mean average precision (mAP@0.50) = 0.405164
+*  precision = 0.38
+*  recall = 0.62
+*  F1-score = 0.47
+*  average IoU = 28.52 % 
+*  mean average precision (mAP@0.50) = 0.405164
 
 The weights for which the metrics were evaluated can be found [here](https://drive.google.com/file/d/1-1YOL3coxmkKRZFs5xUX6UDg9mNoRnog/view?usp=sharing). These metrics were gathered from our YOLOv4 model pre-trained on the COCO dataset and re-trained on images from Google’s Open Image Dataset. Clearly, there is still room for improvement that could be achieved with more training, images of higher resolution, and a more diverse training dataset. 
 
