@@ -19,7 +19,7 @@ Run `yolov4.ipynb`
 ## Training and Evaluation
 (LeNet-5)<br>
 Store your path to `instances_train2014.json` in `annFileTrain`<br>
-Run `coco_load_train_eval.ipynb`
+Run `LeNet_5.ipynb`
 
 (YOLOv4) <br>
 Train: ```!./darknet detector train data/obj.data cfg/yolov4-obj.cfg yolov4.conv.137 -dont_show -map```<br>
