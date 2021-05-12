@@ -69,7 +69,9 @@ Following our work with LeNet-5, we looked towards more advanced models such as 
 
 Figure 1. Top: predictions using baseline YOLOv4 model. Bottom: predictions from the retrained model, where the person on the left is correctly identified and the “chair” label for the stand in the middle is accurately removed.
 
-The training set consisted of 2500 images per class (12,500 images total) whereas the validation and test sets were 20% of that size. Thus, we adjusted ```steps``` to 8000, 9000. Each input image was resized to 416 x 416 to accommodate for limitations of RAM and GPU usage on Google Colab. Since we focused on 5 classes, we set ```max_batches``` to 10000 and used 30 filters for each \[convolutional] layer preceding a \[yolo] layer. We adhered to [recommendations](https://github.com/AlexeyAB/darknet#how-to-train-to-detect-your-custom-objects) from the authors of the baseline model to decide these hyperparameters. The model allows us to specify an ignore threshold, below which predictions would not be shown; we used a relatively low threshold of 0.3 to encompass most of the conclusions drawn in order to analyze how well the model was working. Over 10 hours of training produced a model with the following metrics for a confidence threshold of 0.25:
+The training set consisted of 2500 images per class (12,500 images total) whereas the validation and test sets were 20% of that size. Thus, we adjusted ```steps``` to 8000, 9000. Each input image was resized to 416 x 416 to accommodate for limitations of RAM and GPU usage on Google Colab. Since we focused on 5 classes, we set ```max_batches``` to 10000 and used 30 filters for each \[convolutional] layer preceding a \[yolo] layer. We adhered to [recommendations](https://github.com/AlexeyAB/darknet#how-to-train-to-detect-your-custom-objects) from the authors of the baseline model to decide these hyperparameters. The model allows us to specify an ignore threshold, below which predictions would not be shown; we used a relatively low threshold of 0.3 to encompass most of the conclusions drawn in order to analyze how well the model was working. 
+
+The following metrics were collected from a model trained only on the Person class, since training for all 5 classes caused us to run into many issues with GPU usage and time constraints. This situation is not ideal and we hope to continue training the full model. Over 10 hours of training for the single class produced the following metrics for a confidence threshold of 0.25:
 
 precision = 0.38
 recall = 0.62
@@ -77,6 +79,6 @@ F1-score = 0.47
 average IoU = 28.52 % 
 mean average precision (mAP@0.50) = 0.405164
 
-These metrics were gathered from our YOLOv4 model pre-trained on the COCO dataset and re-trained on images from Google’s Open Image Dataset. Clearly, there is still room for improvement that could be achieved with more training, images of higher resolution, and a more diverse training dataset. 
+The weights for which the metrics were evaluated can be found [here](https://drive.google.com/file/d/1-1YOL3coxmkKRZFs5xUX6UDg9mNoRnog/view?usp=sharing). These metrics were gathered from our YOLOv4 model pre-trained on the COCO dataset and re-trained on images from Google’s Open Image Dataset. Clearly, there is still room for improvement that could be achieved with more training, images of higher resolution, and a more diverse training dataset. 
 
 Beyond improving the accuracy of our models, we hope to expand the labels to make the models more robust to new data. We would also want to extend this project to image segmentation, selecting specific objects out of an image.
