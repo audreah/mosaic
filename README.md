@@ -8,11 +8,12 @@ Péter Hámori \<hampet97@gmail.com>
 Correctly identifying objects portrayed in images remains a significant challenge in computer vision, where existing models are trained on dominant figures within a contemporary context. Data bias of this form neglects underrepresented communities and variations of objects, thereby limiting extensions to more specific topics such as census reporting or photography. This project aims to expand upon existing models to recognize variations within common objects by providing a broader source of training images. The results of this work can be applied to aid in research methods for digital humanities and increase the efficiency of conducting inventory.
 
 ## Data Loading
-(LeNet-5)
+(LeNet-5)<br>
 Download 2014 Train/Val annotations from https://cocodataset.org/#download and name the folder "annotations_trainval2014"<br>
 Run `coco_data_load.ipynb`
 
-(YOLOv4)
+(YOLOv4)<br>
+Make sure you have access to [this Google Drive folder](https://drive.google.com/drive/folders/1Hg38Pfj7WPsUn-6dbeqTCY8qYLmdxS9o?usp=sharing)<br>
 Run `yolov4.ipynb`
 
 ## Training and Evaluation
