@@ -79,3 +79,4 @@ mean average precision (mAP@0.50) = 0.405164
 
 These metrics were gathered from our YOLOv4 model pre-trained on the COCO dataset and re-trained on images from Google’s Open Image Dataset. Clearly, there is still room for improvement that could be achieved with more training, images of higher resolution, and a more diverse training dataset. 
 
+Beyond improving the accuracy of our models, we hope to expand the labels to make the models more robust to new data. We would also want to extend this project to image segmentation, selecting specific objects out of an image.
